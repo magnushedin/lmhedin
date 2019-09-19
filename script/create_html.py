@@ -6,10 +6,10 @@ def sortDict(val):
 
 pictures = dict()
 
-with open('notes.json') as f:
+with open('../db_files/notes.json') as f:
     data = json.load(f)
 
-with open('pictures.json') as f:
+with open('../db_files/pictures.json') as f:
     json_pictures = json.load(f)
 
 for pic in json_pictures[2]['data']:
@@ -21,7 +21,7 @@ for pic in json_pictures[2]['data']:
         pictures[pic['noteid']][pic['id']] = pic['name']
 
 
-fw = open('index.html', 'w')
+fw = open('../generated/index.html', 'w')
 
 fw.write('''
 <!doctype html>
