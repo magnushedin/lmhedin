@@ -17,7 +17,7 @@ for pic in json_pictures[2]['data']:
         pictures[pic['noteid']]
     except:
         pictures[pic['noteid']] = dict()
-    else:
+    finally:
         pictures[pic['noteid']][pic['id']] = pic['name']
 
 
@@ -45,11 +45,12 @@ fw.write('''
 
 notes = data[2]['data']
 
-notes.sort(key=sortDict)
+notes.sort(key=sortDict, reverse=True)
 
 for note in notes:
-    if note['note'] or note['head'] or note['note']:
-        string_to_write = "<p>{}, {}</p><br>\n<p>{}</p><br>\n".format(note['date'], note['head'], note['note'])
+    if note['note'] or note['head'] or note['date']:
+        string_to_write = "<p>{}, {}</p><br>\n<p>{}</p><br>\n".format(note['date'], note['head'].encode('utf-8'), note['note'].encode('ascii', 'ignore').decode('ascii'))
+        #string_to_write = "{}".format(note['head'].encode('ascii', 'ignore').decode('ascii'))
         fw.write("<section id = \"examples\" class = \"examples-section\" > <div class = \"container\" > <div class = \"image-row\" > <div class = \"image-set\" >\n")
         fw.write(string_to_write)
         try:
