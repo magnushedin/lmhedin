@@ -49,7 +49,7 @@ notes.sort(key=sortDict, reverse=True)
 
 for note in notes:
     if note['note'] or note['head'] or note['date']:
-        string_to_write = "<p>{}, {}</p><br>\n<p>{}</p><br>\n".format(note['date'], note['head'].encode('utf-8'), note['note'].encode('ascii', 'ignore').decode('ascii'))
+        string_to_write = "<p>{}, {}</p><br>\n<p>{}</p><br>\n".format(note['date'], note['head'].encode('utf-8', 'ignore').decode('utf-8'), note['note'].encode('utf-8', 'ignore').decode('utf-8'))
         #string_to_write = "{}".format(note['head'].encode('ascii', 'ignore').decode('ascii'))
         fw.write("<section id = \"examples\" class = \"examples-section\" > <div class = \"container\" > <div class = \"image-row\" > <div class = \"image-set\" >\n")
         fw.write(string_to_write)
