@@ -9,7 +9,7 @@ pictures = dict()
 with open('../db_files/notes.json') as f:
     data = json.load(f)
 
-with open('../db_files/pictures.json') as f:
+with open('../db_files/pictures_with_notename.json') as f:
     json_pictures = json.load(f)
 
 for pic in json_pictures[2]['data']:
@@ -50,8 +50,9 @@ notes.sort(key=sortDict, reverse=True)
 for note in notes:
     if note['note'] or note['head'] or note['date']:
         string_to_write = "<p>{}, {}</p><br>\n<p>{}</p><br>\n".format(note['date'], note['head'].encode('utf-8', 'ignore').decode('utf-8'), note['note'].encode('utf-8', 'ignore').decode('utf-8'))
-        #string_to_write = "{}".format(note['head'].encode('ascii', 'ignore').decode('ascii'))
+        # string_to_write = "{}".format(note['head'].encode('ascii', 'ignore').decode('ascii'))
         fw.write("<section id = \"examples\" class = \"examples-section\" > <div class = \"container\" > <div class = \"image-row\" > <div class = \"image-set\" >\n")
+        # debug fw.write("<p>id: {id}</p><br>\n".format(id=note['id']))
         fw.write(string_to_write)
         try:
             pictures[note['id']]
@@ -63,7 +64,7 @@ for note in notes:
                 # fw.write("picture: {}, {}<br>".format(key, img_name))
                 # fw.write("<img src=\"./pictures/{}\" alt=\"{}\" width=\"42\">\n".format(img_name, "img_name"))
                 fw.write(
-                    "<a class=\"example-image-link\" href=\"./pictures/{}\" data-lightbox=\"lightbox[1]\"><img class=\"example-image\" src=\"./pictures/{}\"></a>\n".format(img_name, img_name))
+                    "<a class=\"example-image-link\" href=\"./pictures/{img_name}\" data-lightbox=\"lightbox[{group_id}]\"><img alt=\"{img_id}\" class=\"example-image\" src=\"./pictures/{img_name}\"></a>\n".format(img_name=img_name, group_id=note['id'], img_id=key))
         finally:
             fw.write("</div></div></div></section>\n\n")
 

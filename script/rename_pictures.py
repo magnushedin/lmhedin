@@ -24,7 +24,7 @@ for note in json_notes[2]['data']:
 
 for pic in json_new_pictures[2]['data']:
     # Debug print("pic noteid: {}, date from note: {}".format(pic['noteid'], dict_notes[pic['noteid']]))
-    pic['name_date'] = dict_notes[pic['noteid']]
+    pic['name_date'] = "{}_img_{}.jpg".format(dict_notes[pic['noteid']], pic['id'])
 
 fh_new_pictures = open('../db_files/pictures_with_notename.json', 'w')
 fh_new_pictures.write(json.dumps(json_new_pictures, indent=4))
